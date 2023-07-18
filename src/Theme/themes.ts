@@ -4,9 +4,9 @@ import { fontFamily, typography } from "@mui/system"
 
 export const theme = createTheme({
     palette:{
-        primary:red,
+        primary: red,
     },
     typography:{
-        fontFamily: "Raleway, Arial",
+        fontFamily: "monospace"
     },
 })

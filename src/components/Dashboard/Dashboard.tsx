@@ -1,6 +1,6 @@
 // EXTERNAL
 import React, {useState} from "react";
-import {Drawer as MUIDrawer, ListItemText, AppBar, Toolbar, IconButton, Typography, Divider, Button, CssBaseline, Box, ListItemButton, List} from "@mui/material";
+import {Drawer as MUIDrawer, ListItemText, AppBar, Toolbar, IconButton, Typography, Divider, Button, CssBaseline, Box, ListItemButton, List, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle} from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import {ChevronRight, ChevronLeft} from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
@@ -8,6 +8,8 @@ import { useNavigate } from "react-router-dom";
 
 // INTERNAL
 import { theme } from "../../Theme/themes";
+import { DataTable } from "../DataTable/DataTable";
+import { CardForm } from "../CardForm";
 
 const drawerWidth = 240;
 
@@ -76,6 +78,7 @@ const myStyles = {
 export const Dashboard = () =>{
     const navigate = useNavigate();
     const [open, setOpen] = useState(false);
+    const [dialogOpen, setDialogOpen] = useState(false);
 
     const handleDrawerOpen = () => {
         setOpen(true);
@@ -83,6 +86,14 @@ export const Dashboard = () =>{
 
     const handleDrawerClose = () => {
         setOpen(false);
+    };
+
+    const handleDialogOpen = () => {
+        setDialogOpen(true);
+    };
+
+    const handleDialogClose = () => {
+        setDialogOpen(false);
     };
 
     const itemsList = [
@@ -113,7 +124,19 @@ export const Dashboard = () =>{
                 <MenuIcon/>
                 </IconButton>
                 <Typography variant="h6" noWrap> Dashboard</Typography>
-                <Button sx={ myStyles.toolbarButton }>Add A Card</Button>
+                <Button onClick={handleDialogOpen} sx={ myStyles.toolbarButton }>Add A Card</Button>
+                <Dialog open={dialogOpen} onClose = {handleDialogClose} aria-labelledby="form-dialog-title">
+                    <DialogTitle id="form-dialog-title">Add a Card to the Deck</DialogTitle>
+                    <DialogContent>
+                        <DialogContentText>
+                            Your Card Information: 
+                        </DialogContentText>
+                        <CardForm/>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={handleDialogClose} color="error">Cancel</Button>
+                    </DialogActions>
+                </Dialog>
             </Toolbar>
             </AppBar>
             <MUIDrawer
@@ -131,7 +154,7 @@ export const Dashboard = () =>{
             </Box>
             <Divider />
             <List>
-                {itemsList.map((item, index) => {
+                {itemsList.map((item) => {
                     const { text, onClick } = item;
                     return (
                     <ListItemButton key={text} onClick={onClick}>
@@ -144,7 +167,7 @@ export const Dashboard = () =>{
             <Box sx={ myStyles.content } >
             <Box sx={ myStyles.drawerHeader }/>
   
-            <h1>Filler Text</h1>
+            <h1>Welcome the Pokemon Center (no copyright infringement intended)</h1>
          
             </Box>
         </Box>
