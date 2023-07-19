@@ -167,8 +167,8 @@ export const Dashboard = () =>{
             <Box sx={ myStyles.content } >
             <Box sx={ myStyles.drawerHeader }/>
   
-            <h1>Welcome the Pokemon Center (no copyright infringement intended)</h1>
-         
+            <Typography variant="h2">Welcome the Pokemon Center (no copyright infringement intended)</Typography>
+                <DataTable />
             </Box>
         </Box>
     );

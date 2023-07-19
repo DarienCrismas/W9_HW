@@ -30,13 +30,13 @@ export const CardForm = (props: CardFormProps) =>{
             await serverCalls.update(props.id, data)
             console.log("Card has been updated")
             window.location.reload()
-            if (event) event.currentTarget.reset()
+            if (event) event.target.reset()
         }else{
             dispatch(choosePokemon(data.pokemon))
             dispatch(chooseEdition(data.edition))
             dispatch(chooseEstimatedPrice(data.estimated_price))
             dispatch(chooseCondition(data.condition))
-            dispatch(chooseType(data.type))
+            dispatch(chooseType(data.pokemon_type))
             dispatch(choosePromotional(data.promotional))
             dispatch(chooseMove1(data.move_1))
             dispatch(chooseMove2(data.move_2))
@@ -70,8 +70,8 @@ export const CardForm = (props: CardFormProps) =>{
                     <Input {...register("condition")} name="condition" placeholder="Condition" />
                 </div>
                 <div>
-                    <label htmlFor="type">Type</label>
-                    <Input {...register("type")} name="type" placeholder="Type" />
+                    <label htmlFor="pokemon_type">Type</label>
+                    <Input {...register("pokemon_type")} name="pokemon_type" placeholder="Type" />
                 </div>
                 <div>
                     <label htmlFor="promotional">Promotional</label>

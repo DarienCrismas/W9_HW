@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import { DataGrid, GridColDef, GridRowSelectionModel} from "@mui/x-data-grid";
-import {Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle} from "@mui/material";
+import {Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Typography} from "@mui/material";
 
 
 // INTERNAL
@@ -32,7 +32,7 @@ const columns: GridColDef[] = [
         headerName: "Condition",
         width: 150,
     },{
-        field: "type",
+        field: "pokemon_type",
         headerName: "Type",
         width: 100,
     },{
@@ -74,34 +74,44 @@ export const DataTable = () =>{
         getData()
     };
 
-    return (
-        <Box sx={{height: 400, width: "100%"}}>
-            <DataGrid 
-                rows={cardData}
-                columns={columns}
-                initialState={{
-                    pagination:{
-                        paginationModel:{
-                            pageSize: 5
+    const myAuth = localStorage.getItem("myAuth")
+    if (myAuth === "true"){
+        return (
+            <Box sx={{height: 400, width: "100%"}}>
+                <DataGrid 
+                    rows={cardData}
+                    columns={columns}
+                    initialState={{
+                        pagination:{
+                            paginationModel:{
+                                pageSize: 5
+                            }
                         }
-                    }
-                }}
-                pageSizeOptions={[5]}
-                checkboxSelection
-                onRowSelectionModelChange={(newSelectionModel) => setData(newSelectionModel)}
-                />
-            <Button onClick={handleOpen}>Update</Button>
-            <Button variant="contained" color="warning" onClick={deleteData}>Delete</Button>
-            <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-                <DialogTitle id="form-dialog-title">Update A Card</DialogTitle>
-                <DialogContent>
-                    <DialogContentText>Card id: {gridData[0]}</DialogContentText>
-                    <CardForm id={`${gridData[0]}`} />
-                </DialogContent>
-                <DialogActions>
-                    <Button onClick={handleClose} color="error">Cancel</Button>
-                </DialogActions>
-            </Dialog>
-        </Box>
-    )
+                    }}
+                    pageSizeOptions={[5]}
+                    checkboxSelection
+                    onRowSelectionModelChange={(newSelectionModel) => setData(newSelectionModel)}
+                    />
+                <Button onClick={handleOpen}>Update</Button>
+                <Button variant="contained" sx={{color: "	#5A5A5A"}} onClick={deleteData}>Delete</Button>
+                <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+                    <DialogTitle id="form-dialog-title">Update A Card</DialogTitle>
+                    <DialogContent>
+                        <DialogContentText>Card id: {gridData[0]}</DialogContentText>
+                        <CardForm id={`${gridData[0]}`} />
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={handleClose} color="error">Cancel</Button>
+                    </DialogActions>
+                </Dialog>
+            </Box>
+        )}else{
+            return(
+            <Box>
+                <Typography variant="h2">
+                    You are not authorized to view this page, please sign in. 
+                </Typography>
+            </Box>
+            )
+     };
 };

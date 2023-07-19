@@ -6,7 +6,6 @@ import { Link } from "react-router-dom";
 
 // INTERNAL
 import bg_img from "../../assets/images/thimo-pedersen-TWCnHKKhqSo-unsplash.jpg";
-import { red } from "@mui/material/colors";
 
 interface Props{
     title:string;
@@ -70,6 +69,7 @@ const MainText = styled("div")({
 })
 
 export const Home = (props:Props) =>{
+    const myAuth = localStorage.getItem("myAuth");
     return(
         <Root>
             <NavBar>
@@ -84,21 +84,19 @@ export const Home = (props:Props) =>{
                             Home
                         </NavA>
                     </li>
-                    <li>
-                        <NavA to="/dashboard">
-                            Dashboard
-                        </NavA>
-                    </li>
-                    <li>
-                        <NavA to="/signin">
-                            Sign In
-                        </NavA>
-                    </li>
-                    <li>
-                        <NavA to="/signin">
-                            Sign Up
-                        </NavA>
-                    </li>
+                    {myAuth === "true" ? 
+                        <><li>
+                        <NavA to="/dashboard">Dashboard</NavA>
+                       </li><li>
+                            <NavA to="/signin">Sign Out</NavA>
+                        </li></>
+                        :
+                         <><li>
+                         <NavA to="/signin">Sign In</NavA>
+                        </li><li>
+                             <NavA to="/signup">Sign Up</NavA>
+                         </li></>
+                    };
                 </LogoNav>
             </NavBar>
             <Main>
