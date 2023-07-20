@@ -2,13 +2,15 @@
 import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import { DataGrid, GridColDef, GridRowSelectionModel} from "@mui/x-data-grid";
-import {Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Typography} from "@mui/material";
+import {Accordion, AccordionDetails, AccordionSummary, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Typography} from "@mui/material";
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 
 // INTERNAL
 import { serverCalls } from "../../api";
 import { useGetData } from "../../custom-hooks";
 import { CardForm } from "../CardForm";
+import { theme } from "../../Theme/themes";
 
 
 
@@ -93,7 +95,9 @@ export const DataTable = () =>{
                     onRowSelectionModelChange={(newSelectionModel) => setData(newSelectionModel)}
                     />
                 <Button onClick={handleOpen}>Update</Button>
-                <Button variant="contained" sx={{color: "	#5A5A5A"}} onClick={deleteData}>Delete</Button>
+                <Button variant="contained" sx={{backgroundColor: "red", "&:hover": { backgroundColor: "black",
+            color: "white"
+          },}} onClick={deleteData}>Delete</Button>
                 <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
                     <DialogTitle id="form-dialog-title">Update A Card</DialogTitle>
                     <DialogContent>
@@ -104,7 +108,34 @@ export const DataTable = () =>{
                         <Button onClick={handleClose} color="error">Cancel</Button>
                     </DialogActions>
                 </Dialog>
+                <Accordion>
+                    <AccordionSummary
+                        expandIcon={<ExpandMoreIcon />}
+                        aria-controls="a1-content"
+                        id="a1-header">
+                        <Typography>About</Typography>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                        <Typography>
+                        Web app for tracking your pokemon card collection.
+                        </Typography>
+                    </AccordionDetails>
+                    </Accordion>
+                    <Accordion>
+                    <AccordionSummary
+                        expandIcon={<ExpandMoreIcon />}
+                        aria-controls="a2-content"
+                        id="a2-header">
+                        <Typography>Instructions</Typography>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                        <Typography>
+                        If there was more functionality this is where I would put actual instructions. Maybe I'll expand this after capstone.
+                        </Typography>
+                    </AccordionDetails>
+                </Accordion>
             </Box>
+            
         )}else{
             return(
             <Box>

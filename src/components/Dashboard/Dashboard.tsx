@@ -1,9 +1,10 @@
 // EXTERNAL
 import React, {useState} from "react";
-import {Drawer as MUIDrawer, ListItemText, AppBar, Toolbar, IconButton, Typography, Divider, Button, CssBaseline, Box, ListItemButton, List, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle} from "@mui/material";
+import {Drawer as MUIDrawer, ListItemText, AppBar, Toolbar, IconButton, Typography, Divider, Button, CssBaseline, Box, ListItemButton, List, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, AccordionSummary, AccordionDetails, Accordion} from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import {ChevronRight, ChevronLeft} from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 
 // INTERNAL
@@ -69,10 +70,13 @@ const myStyles = {
       },
       toolbarButton: {
         marginLeft: "auto",
-        backgroundColor: theme.palette.primary.contrastText
-      }
+        backgroundColor: theme.palette.primary.contrastText,
+        "&:hover": {
+            backgroundColor: "black",
+            color: "white"
+          },
+      },
 };
-
 
 
 export const Dashboard = () =>{
@@ -170,6 +174,6 @@ export const Dashboard = () =>{
             <Typography variant="h2">Welcome the Pokemon Center (no copyright infringement intended)</Typography>
                 <DataTable />
             </Box>
-        </Box>
+        </Box> 
     );
 };
